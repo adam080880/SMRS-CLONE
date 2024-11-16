@@ -10,13 +10,13 @@
     <x-side-bar :active="request()->route()->getName()"></x-side-bar>
 
     {{-- Main Content --}}
-    <div id="main-content" class="w-4/5 p-8 overflow-y-auto h-screen ml-[20%]">
+    <div id="main-content" class="w-4/5 bg-red-300 p-8 overflow-y-auto h-screen ml-[20%]">
         <div class="px-8 py-8">
             <div class="bg-white border border-gray-200 rounded-3xl shadow-sm sm:p-6">
                 <div class="flex justify-between mb-4">
                     
                     {{-- Dropdown Pilih Prodi --}}
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownProdi" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownProdi" class="text-white bg-red-400 hover:bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
                         {{ $prodi!=''?$prodi:'Pilih Prodi' }}
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -34,14 +34,11 @@
                             <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-prodi="Fisika">Fisika</a></li>
                         </ul>
                     </div>
-
-                    {{-- Input Pencarian --}}
-                    <input id="searchRuang" type="text" placeholder="Cari Ruang" class="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 w-1/4">
                 </div>
 
                 {{-- Tabel Plot Ruang --}}
                 <table id="plotRuang" class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
-                    <thead class="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                    <thead class="bg-red-400 text-white">
                         <tr>
                             <th class="py-3 px-4 text-left text-sm font-semibold">No</th>
                             <th class="py-3 px-4 text-left text-sm font-semibold">No Ruang</th>

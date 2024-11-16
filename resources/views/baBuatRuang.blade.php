@@ -13,19 +13,19 @@
         {{-- end sidebar --}}
 
     {{-- Main Content --}}
-    <div id="main-content" class="w-4/5 p-8 overflow-y-auto h-screen ml-[20%]">
+    <div id="main-content" class="w-4/5 p-8 overflow-y-auto bg-red-300 h-screen ml-[20%]">
         <div class="px-8 py-8">
             <div class="bg-white border border-gray-200 rounded-3xl shadow-sm sm:p-6">
                 <div class="flex justify-between mb-4">
                     <input id="searchRuang" type="text" placeholder="Cari Ruang" class="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 w-1/4">
-                    <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+                    <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
                         Buat Ruang +
                     </button>
                 </div>
 
                 {{-- Tabel Ruangan --}}
                 <table id="Ruang" class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
-                    <thead class="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                    <thead class="bg-red-400 text-white">
                         <tr>
                             <th class="py-3 px-4 text-center text-sm font-semibold">No</th>
                             <th class="py-3 px-4 text-center text-sm font-semibold">No Ruang</th>
@@ -103,7 +103,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <button type="submit" class="text-white inline-flex items-center bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 010 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                                         </svg>
@@ -182,7 +182,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                <button type="submit" class="text-white inline-flex items-center bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 010 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                     </svg>

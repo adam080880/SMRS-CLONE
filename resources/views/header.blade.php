@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Poppins:wght@200;400&display=swap"
     rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="iris.png">
+    <link rel="icon" type="image/x-icon" href="Logo.jpg">
     <title>@yield('title') - IRIS</title>
 
     {{-- jquery --}}

@@ -28,19 +28,19 @@
     {{-- Main Content --}}
     <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[340px]">
         <div class="bg-white border border-gray-300 rounded-3xl shadow-md p-6">
-            <h1 class="text-3xl font-bold mb-6 text-blue-600">Pengajuan Ruang</h1>
+            <h1 class="text-3xl font-bold mb-6 text-red-300">Pengajuan Ruang</h1>
             
             <!-- Input Search dan Button Setujui Semua -->
             <div class="flex justify-between mb-6">
                 <input id="searchRuang" type="text" placeholder="Cari Ruang" class="bg-gray-100 rounded-lg px-4 py-2 w-2/3">
-                <button id="selectAll" type="button" onclick="updateStatus('all', 'Disetujui')" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5">
+                <button id="selectAll" type="button" onclick="updateStatus('all', 'Disetujui')" class="text-white bg-red-400 hover:bg-red-500 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5">
                     Setujui Semua
                 </button>
             </div>
             
             <!-- Table Ruang -->
             <table id="Ruang" class="min-w-full bg-white rounded-lg shadow-md">
-                <thead class="bg-gray-200">
+                <thead class="bg-red-300">
                     <tr>
                         <th class="py-3 px-4 text-left text-sm font-semibold">No</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold">No Ruang</th>
@@ -70,7 +70,7 @@
                             </span>
                         </td>
                         <td class="py-3 px-4">
-                            <button type="button" data-modal-target="detailModal-{{ $ruang->id }}" data-modal-toggle="detailModal-{{ $ruang->id }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg px-3 py-2 text-xs font-medium rounded-lg">Detail</button>
+                            <button type="button" data-modal-target="detailModal-{{ $ruang->id }}" data-modal-toggle="detailModal-{{ $ruang->id }}" class="text-white bg-red-300 hover:bg-red-400 shadow-lg px-3 py-2 text-xs font-medium rounded-lg">Detail</button>
                             @if ($ruang->status == 'Pending')
                             <button id="approve-btn-{{ $ruang->id }}" type="button" onclick="approve({{ $ruang->id }})" class="text-white bg-[#2ACD7F] px-3 py-2 text-xs font-medium rounded-lg ml-2">Setuju</button>
                             <button id="reject-btn-{{ $ruang->id }}" type="button" onclick="reject({{ $ruang->id }})" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg px-3 py-2 text-xs font-medium rounded-lg ml-2">Tolak</button>

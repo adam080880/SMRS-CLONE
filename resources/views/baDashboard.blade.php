@@ -34,7 +34,7 @@
                         <h3 class="text-lg font-bold">Fakultas Sains dan Matematika</h3>
                     </div>
                     <!-- Foto Besar Lingkaran -->
-                    <div class="absolute top-[25px] right-[10px] bottom-[-50px] rounded-full w-[150px] h-[150px] bg-black overflow-hidden">
+                    <div class="absolute top-[25px] right-[430px] bottom-[-50px] rounded-full w-[150px] h-[150px] bg-black overflow-hidden">
                         <img src="alip.jpg" alt="Profile Image" class="w-full h-full object-cover">
                     </div>
                 </div>

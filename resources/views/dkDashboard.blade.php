@@ -21,30 +21,30 @@
       {{-- end sidebar --}}
 
         {{-- Main Content --}}
-        <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[340px]">
-            <div class="flex justify-between items-start">
-                <!-- Bagian Kiri: Dashboard DEKAN -->
-                <div>
-                    <h1 class="text-3xl font-bold">Dashboard DEKAN</h1>
-                    <div class="mt-4 bg-white p-6 rounded-2xl shadow-md border border-gray-300 w-[600px] relative">
-                        <!-- Profil Information -->
-                        <div class="flex">
-                            <div class="ml-4">
-                                <h2 class="text-xl font-bold text-blue-600">PROFIL</h2>
-                                <p>alipxander</p>
-                                <p>akualip.com</p>
-                            </div>
-                        </div>
-                        <!-- Informasi Fakultas -->
-                        <div class="mt-4 bg-gray-300 text-center rounded-2xl p-4">
-                            <h3 class="text-lg font-bold">Fakultas Sains dan Matematika</h3>
-                        </div>
-                        <!-- Foto Besar Lingkaran -->
-                        <div class="absolute right-[-50px] bottom-[-50px] rounded-full w-[150px] h-[150px] bg-black overflow-hidden">
-                            <img src="alip.jpg" alt="Profile Image" class="w-full h-full object-cover">
+        <div id="main-content" class="ml-[20%] p-8 bg-red-300 min-h-screen">
+        <div class="flex justify-between items-start">
+            <!-- Bagian Kiri: Dashboard Akademik -->
+            <div>
+                <h1 class="text-3xl font-bold mb-4">Dashboard Bagian Akademik</h1>
+                <div class="relative bg-white p-6 rounded-2xl shadow-md border border-gray-300 w-[600px]">
+                    <!-- Profil Information -->
+                    <div class="flex justify-between items-center">
+                        <div class="ml-4">
+                            <h2 class="text-xl font-bold text-black">PROFILE</h2>
+                            <p>Rusdi Ganteng</p>
+                            <p>rusdi@gmail.com</p>
                         </div>
                     </div>
+                    <!-- Informasi Fakultas -->
+                    <div class="mt-4 bg-gray-300 text-center rounded-2xl p-4 w-[400px]">
+                        <h3 class="text-lg font-bold">Fakultas Sains dan Matematika</h3>
+                    </div>
+                    <!-- Foto Besar Lingkaran -->
+                    <div class="absolute top-[25px] right-[430px] bottom-[-50px] rounded-full w-[150px] h-[150px] bg-black overflow-hidden">
+                        <img src="alip.jpg" alt="Profile Image" class="w-full h-full object-cover">
+                    </div>
                 </div>
+            </div>
 
                 <!-- Tombol Logout -->
                 <div class="flex flex-col items-end">

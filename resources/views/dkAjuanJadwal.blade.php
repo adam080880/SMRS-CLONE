@@ -23,7 +23,7 @@
     {{-- Main Content --}}
     <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[340px]">
         <div class="bg-white border border-gray-300 rounded-3xl shadow-md p-6">
-            <h1 class="text-3xl font-bold mb-6 text-blue-600">Pengajuan Jadwal</h1>
+            <h1 class="text-3xl font-bold mb-6 text-red-400">Pengajuan Jadwal</h1>
             
             <!-- Input Search -->
             <div class="flex justify-between mb-6">
@@ -32,7 +32,7 @@
             
             <!-- Table Jadwal -->
             <table id="Ruang" class="min-w-full bg-white rounded-lg shadow-md text-center">
-                <thead class="bg-gray-200">
+                <thead class="bg-red-300">
                     <tr>
                         <th class="py-3 px-4 text-sm font-semibold">No</th>
                         <th class="py-3 px-4 text-sm font-semibold">Program Studi</th>
