@@ -13,7 +13,7 @@
               {{-- end sidebar --}}
 
         {{-- Main Content --}}
-        <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[340px]">
+        <div id="main-content" class="flex-1 p-8 bg-red-300 min-h-screen ml-[340px]">
             <div class="flex justify-between items-start">
                 <!-- Bagian Kiri: Header Buat Jadwal -->
                 <div class="w-full">
@@ -22,7 +22,7 @@
                         <!-- Input dan Tombol -->
                         <div class="flex justify-between mb-6">
                             <input id="searchMk" type="text" placeholder="Cari Mata Kuliah" class="bg-gray-100 rounded-lg px-4 py-2 w-1/3">
-                            <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-red-400 hover:bg-red-500 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                                 Buat Jadwal +
                             </button>
                         </div>
@@ -52,7 +52,7 @@
                                         <td class="py-4 px-6">{{ $jadwal->kapasitas }}</td>
                                         <td class="py-4 px-6">
                                             <button type="button" data-modal-target="updateModal-{{ $jadwal->id }}" data-modal-toggle="updateModal-{{ $jadwal->id }}" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">
-                                                Buat
+                                                Edit
                                             </button>
                                         </td>
                                         <td class="py-4 px-6">
@@ -136,7 +136,7 @@
                                             <input type="text" name="jamselesai" id="jamselesai-{{ $jadwal->id }}" aria-label="disabled input" class=" bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="00:00" disabled>
                                         </div> 
                                     </div>
-                                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <button type="submit" class="text-white inline-flex items-center bg-red-400 hover:bg-red-500 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                         Buat Jadwal
                                     </button>

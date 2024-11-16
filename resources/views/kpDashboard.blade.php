@@ -10,7 +10,7 @@
     {{-- End Sidebar --}}
 
     {{-- Main Content --}}
-    <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[350px]">
+    <div id="main-content" class="flex-1 p-8 bg-red-300 min-h-screen ml-[350px]">
         <div class="flex justify-between items-start mb-8">
             <!-- Bagian Kiri: Dashboard Kaprodi -->
             <div>
@@ -19,9 +19,9 @@
                     <!-- Profil Information -->
                     <div class="flex items-center">
                         <div class="ml-4">
-                            <h2 class="text-xl font-bold text-blue-600">PROFIL</h2>
-                            <p>Akbar</p>
-                            <p>akbar@gmail.com</p>
+                            <h2 class="text-xl font-bold">PROFIL</h2>
+                            <p>test9</p>
+                            <p>test9@gmail.com</p>
                         </div>
                     </div>
                     <!-- Informasi Fakultas -->

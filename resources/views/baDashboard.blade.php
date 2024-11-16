@@ -25,8 +25,8 @@
                     <div class="flex justify-between items-center">
                         <div class="ml-4">
                             <h2 class="text-xl font-bold text-black">PROFILE</h2>
-                            <p>Rusdi Ganteng</p>
-                            <p>rusdi@gmail.com</p>
+                            <p>test11</p>
+                            <p>test11@gmail.com</p>
                         </div>
                     </div>
                     <!-- Informasi Fakultas -->

@@ -11,17 +11,17 @@
     {{-- End Sidebar --}}
 
     {{-- Main Content --}}
-    <div id="main-content" class="flex-1 p-8 bg-gray-200 min-h-screen ml-[340px]">
+    <div id="main-content" class="flex-1 p-8 bg-red-300 min-h-screen ml-[340px]">
         <div class="flex flex-col items-start space-y-8">
             <!-- Header Buat Mata Kuliah -->
-            <h1 class="text-3xl font-bold text-blue-600 mb-4">Buat Mata Kuliah</h1>
+            <h1 class="text-3xl font-bold text-black mb-4">Buat Mata Kuliah</h1>
 
             <!-- Kontainer Form dan Tabel -->
             <div class="w-full max-w-6xl bg-white p-6 rounded-2xl shadow-md border border-gray-300">
                 <!-- Input dan Tombol -->
                 <div class="flex justify-between items-center mb-6">
                     <input id="searchMk" type="text" placeholder="Cari Mata Kuliah" class="bg-gray-100 rounded-lg px-4 py-2 w-1/2">
-                    <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5">
+                    <button id="selectAll" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-white bg-red-400 hover:bg-red-500 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5">
                         Buat Mata Kuliah +
                     </button>
                 </div>
@@ -115,7 +115,7 @@
                                         <input type="number" name="jumlah_kelas" id="jumlah_kelas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                                     </div>
                                 </div>
-                                <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">Tambah Mata Kuliah</button>
+                                <button type="submit" class="text-white bg-red-300 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5">Tambah Mata Kuliah</button>
                             </form>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                             <input type="number" name="jumlah_kelas" id="jumlah_kelas" value="{{ $matakuliah->jumlah_kelas }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                                         </div>
                                     </div>
-                                    <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">Ubah Mata Kuliah</button>
+                                    <button type="submit" class="text-white bg-red-400 hover:bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5">Ubah Mata Kuliah</button>
                                 </form>
                             </div>
                         </div>
