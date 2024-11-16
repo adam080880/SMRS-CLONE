@@ -60,7 +60,7 @@
                         </tr>
 
                         {{-- Modal Edit Ruang --}}
-                        <div id="updateModal-{{ $ruang->id }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                        <div id="updateModal-{{ $ruang->id }}" tabindex="-1" class=" fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
                             <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md p-6 mx-auto">
                                 <div class="flex items-center justify-between mb-4">
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Ruang</h3>
@@ -114,7 +114,7 @@
                         </div>
 
                         {{-- Modal Delete Ruang --}}
-                        <div id="deleteModal-{{ $ruang->id }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                        <div id="deleteModal-{{ $ruang->id }}" tabindex="-1" class=" fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
                             <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md p-6 mx-auto">
                                 <div class="text-center">
                                     <svg class="w-16 h-16 text-red-600 mx-auto mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -140,7 +140,7 @@
     </div>
 
     {{-- Modal Create Ruang --}}
-    <div id="crud-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div id="crud-modal" tabindex="-1" class=" fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
         <div class="bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md p-6 mx-auto">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Buat Ruang</h3>
