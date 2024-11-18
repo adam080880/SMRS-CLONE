@@ -15,9 +15,9 @@ class MahasiswaSeeder extends Seeder
     {
         DB::table('mahasiswa')->insert([
             [
-                'nim' => '24060122140174',
-                'nama' => 'Aryela Rachma Davina',
-                'email' => 'yela@gmail.com',
+                'nim' => '24060122140123',
+                'nama' => 'Qaynan',
+                'email' => 'Qaynan@gmail.com',
                 'no_telp' => '085000000000',
                 'jenis_kelamin' => 'P',
                 'tanggal_lahir' => '2004-02-02',
@@ -30,9 +30,9 @@ class MahasiswaSeeder extends Seeder
                 'status' => 'Aktif',
             ],
             [
-                'nim' => '24060122130070',
-                'nama' => 'Indana Najwa Ramadhani',
-                'email' => 'indananajwa@gmail.com',
+                'nim' => '24060122140124',
+                'nama' => 'Thoriq',
+                'email' => 'Thoriq@gmail.com',
                 'no_telp' => '085001002003',
                 'jenis_kelamin' => 'P',
                 'tanggal_lahir' => '2004-04-04',
@@ -45,9 +45,9 @@ class MahasiswaSeeder extends Seeder
                 'status' => 'Aktif',
             ],
             [
-                'nim' => '24060122140131',
-                'nama' => 'Muhammad Raja Fadhil Habibi',
-                'email' => 'rajafadhil@gmail.com',
+                'nim' => '240601221401235',
+                'nama' => 'Lucky',
+                'email' => 'Lucky@gmail.com',
                 'no_telp' => '085338182967',
                 'jenis_kelamin' => 'L',
                 'tanggal_lahir' => '2004-01-05',
@@ -60,8 +60,8 @@ class MahasiswaSeeder extends Seeder
                 'status' => 'Aktif',
             ],
             [
-                'nim' => '24060122140129',
-                'nama' => 'Riski Akbar Firmansah',
+                'nim' => '24060122140126',
+                'nama' => 'Reva',
                 'email' => 'riskiakbar@gmail.com',
                 'no_telp' => '085004005006',
                 'jenis_kelamin' => 'L',
