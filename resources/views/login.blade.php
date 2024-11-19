@@ -9,7 +9,7 @@
         <div class="flex flex-col items-center">
             <!-- Logo -->
             <img src="Logo.jpg" alt="SMRS Logo" class="w-70 mb-4">
-            <h2 class="text-2xl font-semibold text-gray-700">⸻⸻   LOGIN   ⸻⸻</h2>
+            <h2 class="text-2xl font-semibold text-gray-700">────── LOGIN ──────</h2>
         </div>
         
         <form action="{{ route('login') }}" method="POST" class="mt-8">
