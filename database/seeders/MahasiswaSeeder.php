@@ -62,7 +62,7 @@ class MahasiswaSeeder extends Seeder
             [
                 'nim' => '24060122140126',
                 'nama' => 'Reva',
-                'email' => 'riskiakbar@gmail.com',
+                'email' => 'reva@gmail.com',
                 'no_telp' => '085004005006',
                 'jenis_kelamin' => 'L',
                 'tanggal_lahir' => '2004-03-03',
