@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ruang;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class RuangSeeder extends Seeder
 {
@@ -13,7 +13,6 @@ class RuangSeeder extends Seeder
      */
     public function run(): void
     {
-        
         $ruang = [
             ['noruang' => 'E101', 'blokgedung' => 'E', 'lantai' => '1', 'fungsi' => 'Ruang Kelas', 'kapasitas' => '50', 'status' => 'Disetujui', 'prodi' => 'Informatika'],
             ['noruang' => 'E102', 'blokgedung' => 'E', 'lantai' => '1', 'fungsi' => 'Ruang Kelas', 'kapasitas' => '50', 'status' => 'Disetujui', 'prodi' => 'Informatika'],
@@ -36,9 +35,7 @@ class RuangSeeder extends Seeder
             ['noruang' => 'C014', 'blokgedung' => 'C', 'lantai' => '1', 'fungsi' => 'Ruang Kelas', 'kapasitas' => '50', 'status' => 'Disetujui', 'prodi' => 'Informatika']
         ];
 
-        foreach ($ruang as $p) {
-            Ruang::create($p);
-        }
+        DB::table('ruang')->insert($ruang);
         
     }
 }

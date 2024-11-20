@@ -25,6 +25,15 @@ class MatakuliahSeeder extends Seeder
             ['kodemk' => 'PAFS6323', 'nama' => 'Fisika Matematika I', 'program_studi' => 'Fisika', 'plotsemester' => 2, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
             ['kodemk' => 'PAFS6324', 'nama' => 'Termodinamika', 'program_studi' => 'Fisika', 'plotsemester' => 2, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
             ['kodemk' => 'PAFS6325', 'nama' => 'Gelombang', 'program_studi' => 'Fisika', 'plotsemester' => 2, 'sks' => 2, 'sifat' => 'W', 'jumlah_kelas' => 4],
+
+
+            // Keperluan dataset irs
+            ['kodemk' => 'STRDAT01', 'nama' => 'Struktur Data 1', 'program_studi' =>'Informatika', 'plotsemester' => 1, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
+            ['kodemk' => 'PEMDAS01', 'nama' => 'Dasar Pemrograman 1', 'program_studi' =>'Informatika', 'plotsemester' => 1, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
+            ['kodemk' => 'STRDAT02', 'nama' => 'Struktur Data 2', 'program_studi' =>'Informatika', 'plotsemester' => 2, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
+            ['kodemk' => 'PEMDAS02', 'nama' => 'Dasar Pemrograman 2', 'program_studi' =>'Informatika', 'plotsemester' => 2, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
+            ['kodemk' => 'STRDAT03', 'nama' => 'Struktur Data 3', 'program_studi' =>'Informatika', 'plotsemester' => 3, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
+            ['kodemk' => 'PEMDAS03', 'nama' => 'Dasar Pemrograman 3', 'program_studi' =>'Informatika', 'plotsemester' => 3, 'sks' => 4, 'sifat' => 'W', 'jumlah_kelas' => 4],
         ]);
     }
 }

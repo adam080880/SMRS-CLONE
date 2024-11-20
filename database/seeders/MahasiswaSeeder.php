@@ -28,6 +28,7 @@ class MahasiswaSeeder extends Seeder
                 'semester_berjalan' => 5,
                 'alamat' => 'Sigar Bencah',
                 'status' => 'Aktif',
+                'pa_nip' => '1234567801',
             ],
             [
                 'nim' => '24060122130070',
@@ -36,13 +37,14 @@ class MahasiswaSeeder extends Seeder
                 'no_telp' => '085001002003',
                 'jenis_kelamin' => 'P',
                 'tanggal_lahir' => '2004-04-04',
-                'prodi' => 'Matematika',
+                'prodi' => 'Informatika',
                 'jalur_masuk' => 'MANDIRI',
                 'angkatan' => 2022,
                 'ipk' => 3.5,
                 'semester_berjalan' => 5,
                 'alamat' => 'Sigar Bencah',
                 'status' => 'Aktif',
+                'pa_nip' => '1234567801',
             ],
             [
                 'nim' => '24060122140131',
@@ -58,6 +60,7 @@ class MahasiswaSeeder extends Seeder
                 'semester_berjalan' => 1,
                 'alamat' => 'Alfamart Gondang',
                 'status' => 'Aktif',
+                'pa_nip' => '1234567801',
             ],
             [
                 'nim' => '24060122140129',
@@ -66,13 +69,14 @@ class MahasiswaSeeder extends Seeder
                 'no_telp' => '085004005006',
                 'jenis_kelamin' => 'L',
                 'tanggal_lahir' => '2004-03-03',
-                'prodi' => 'Fisika',
+                'prodi' => 'Informatika',
                 'jalur_masuk' => 'MANDIRI',
                 'angkatan' => 2022,
                 'ipk' => 3.5,
                 'semester_berjalan' => 5,
                 'alamat' => 'Jl. Anggrek No. 3, Yogyakarta',
                 'status' => 'Aktif',
+                'pa_nip' => '1234567802',
             ],
         ]);
     }

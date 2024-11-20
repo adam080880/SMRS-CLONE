@@ -13,6 +13,7 @@ class DashboardController extends Controller
     {
         // Get the authenticated user
         $user = auth()->user();
+        $mahasiswa = Mahasiswa::where('email', $user->email)->first();
 
         // Access user name
         $userName = $user->name;
@@ -21,13 +22,14 @@ class DashboardController extends Controller
         $semester_berjalan = Mahasiswa::where('email', $user->email)->first()->semester_berjalan;
 
         $data = [
-            'userName' => $userName,
-            'status' => $status,
+            'user' => $userName,
+            'ipk' => $ipk
         ];
 
         // Pass the user data to a view, or return a response
-        return view('MhsDashboard',compact('data', 'ipk', 'semester_berjalan'));
+        return view('mhsDashboard', compact('data', 'ipk', 'semester_berjalan'));
     }
+
     public function index2()
     {
         // Get the authenticated user

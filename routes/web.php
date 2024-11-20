@@ -12,12 +12,12 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AjuanRuangController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\BuatIrsController;
+use App\Http\Controllers\PAController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
-
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -32,13 +32,13 @@ Route::get('dashboard', function () {
     } else if (auth()->user()->kp == 1) {
         return view('kpDashboard');
     } else if (auth()->user()->pa == 1) {
-        return view('paDashboard');
+        return app('App\Http\Controllers\PAController')->dashboard();
     }
 
 })->name('dashboard')->middleware('auth');
 
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::get('product/{product}/delete',[ProductsController::class,'destroy']);
 
@@ -57,11 +57,9 @@ Route::get('/mhsIrs', function () {
 Route::get('/irs', [IrsController::class, 'all'])->name('irs');
 Route::get('/irs/{id}/{email}', [IrsController::class, 'index']);
 
-
 //KHS
 Route::get('/khs', [KhsController::class, 'all'])->name('khs');
 Route::get('/khs/{id}', [KhsController::class, 'index']);
-
 
 //Transkrip
 Route::get('m/transkrip', function () {
@@ -113,8 +111,6 @@ Route::get('p/perwalian', function () {
     return view('paPerwalian');
 })->name('perwalian');
 
-
-
 Route::resource('/matakuliah', MatakuliahController::class)->names([
     'index' => 'matakuliah',
 ]);
@@ -138,5 +134,5 @@ Route::delete('/pembuatan-ruang/{id}', [RuangController::class, 'destroyruang'])
 
 Route::post('/ruang', [RuangController::class, 'store'])->name('ruang.store');
 
-
-
+Route::get('/perwalian', [PAController::class, 'list'])->name('perwalian.list');
+Route::get('/perwalian/{irsId}', [PAController::class, 'detail'])->name('perwalian.detail');
