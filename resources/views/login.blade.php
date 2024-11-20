@@ -8,8 +8,8 @@
     <div class="bg-white shadow-lg rounded-2xl p-10 w-1/3">
         <div class="flex flex-col items-center">
             <!-- Logo -->
-            <img src="Logo.jpg" alt="IRIS Logo" class="w-70 mb-4">
-            <h2 class="text-2xl font-semibold text-gray-700">⸻⸻⸻   LOGIN   ⸻⸻⸻</h2>
+            <img src="Logo.jpg" alt="SMRS Logo" class="w-70 mb-4">
+            <h2 class="text-2xl font-semibold text-gray-700">────── LOGIN ──────</h2>
         </div>
         
         <form action="{{ route('login') }}" method="POST" class="mt-8">
