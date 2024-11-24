@@ -18,8 +18,8 @@
           <div class="flex flex-1 gap-[16px] items-center flex-row">
             <img src="{{ asset('alip.jpg') }}" class="w-[52px] h-[52px] rounded-full" />
             <div class="flex-1 flex flex-col">
-              <span class="text-[24px] text-[#101828]">Mochammad Qaynan Mahdaviqya</span>
-              <span class="text-[18px] text-[#101828]">NIP : 24060122140170</span>
+              <span class="text-[24px] text-[#101828]">{{$userName}}</span>
+              <span class="text-[18px] text-[#101828]">NIP : {{ $dosen->nip }}</span>
             </div>
           </div>
 
@@ -57,38 +57,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">1.</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Thoriq</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">1231231232132</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">5</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
-                <div class="d-flex items-center justify-center flex w-full">
-                  <div class="px-[24px] py-[2px] font-[500] rounded-[20px] bg-[#AAFFCC] text-center w-min">
-                    <span class="text-[18px] text-[#299233]">Accepted</span>
+            @php($i = 0)
+            @foreach ($mahasiswaPerwalian as $mahasiswa)
+              <tr>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{++$i}}.</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$mahasiswa->nama}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$mahasiswa->nim}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$mahasiswa->semester_berjalan}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
+                  <div class="d-flex items-center justify-center flex w-full">
+                    <div class="px-[24px] py-[2px] font-[500] rounded-[20px] bg-[{{ $mahasiswa->status_pengajuan !== 'Approved' ? '#FFAAAA' : '#AAFFCC';}}] text-center w-min">
+                      <span class="text-[18px] text-[{{ $mahasiswa->status_pengajuan !== 'Approved' ? '#922929' : '#299233';}}]">{{$mahasiswa->status_pengajuan ? $mahasiswa->status_pengajuan : 'Belum ada pengajuan'}}</span>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
-                <a href="{{ route('perwalian.detail', ['irsId' => 1]) }}">Lihat Detail</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">2.</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Thoriq</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">1231231232132</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">5</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
-                <div class="d-flex items-center justify-center flex w-full">
-                  <div class="px-[24px] py-[2px] font-[500] rounded-[20px] bg-[#FFAAAA] text-center w-min">
-                    <span class="text-[18px] text-[#922929]">Rejected</span>
-                  </div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
-                <a href="{{ route('perwalian.detail', ['irsId' => 2]) }}">Lihat Detail</a>
-              </td>
-            </tr>
+                </td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">
+                  <a href="{{ route('perwalian.detail', ['nim' => $mahasiswa->nim]) }}">Lihat Detail</a>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

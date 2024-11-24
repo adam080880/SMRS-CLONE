@@ -13,6 +13,7 @@ use App\Http\Controllers\AjuanRuangController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\BuatIrsController;
 use App\Http\Controllers\PAController;
+use App\Http\Controllers\MahasiswaController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -24,7 +25,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('dashboard', function () {
     if (auth()->user()->mhs == 1) {
-        return app('App\Http\Controllers\DashboardController')->index();
+        return app('App\Http\Controllers\MahasiswaController')->dashboard();
     } else if (auth()->user()->ba == 1) {
         return app('App\Http\Controllers\RuangController')->dashboard();
     } else if (auth()->user()->dk == 1) {
@@ -135,4 +136,15 @@ Route::delete('/pembuatan-ruang/{id}', [RuangController::class, 'destroyruang'])
 Route::post('/ruang', [RuangController::class, 'store'])->name('ruang.store');
 
 Route::get('/perwalian', [PAController::class, 'list'])->name('perwalian.list');
-Route::get('/perwalian/{irsId}', [PAController::class, 'detail'])->name('perwalian.detail');
+Route::get('/perwalian/{nim}', [PAController::class, 'detail'])->name('perwalian.detail');
+Route::post('/perwalian/irs/reject/{nim}', [PAController::class, 'rejectIrs'])->name('api.pa.irs.reject');
+Route::post('/perwalian/irs/approve/{nim}', [PAController::class, 'approveIrs'])->name('api.pa.irs.approve');
+
+// Mahasiswa IRS
+Route::get('/mahasiswa/irs', [MahasiswaController::class, 'mahasiswaIrs'])->name('mahasiswa.irs');
+Route::get('/mahasiswa/irs/create', [MahasiswaController::class, 'mahasiswaIrsCreate'])->name('mahasiswa.irs.create');
+Route::get('/mahasiswa/irs/{semester}', [MahasiswaController::class, 'mahasiswaIrsDetail'])->name('mahasiswa.irs.detail');
+Route::get('/mahasiswa/khs', [MahasiswaController::class, 'mahasiswaKhs'])->name('mahasiswa.khs');
+Route::get('/mahasiswa/khs/{semester}', [MahasiswaController::class, 'mahasiswaKhsDetail'])->name('mahasiswa.khs.detail');
+
+Route::post('/mahasiswa/irs/create', [MahasiswaController::class, 'createMahasiswaIrs'])->name('api.mahasiswa.irs.create');

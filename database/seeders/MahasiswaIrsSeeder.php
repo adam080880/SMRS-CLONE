@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Mahasiswa;
+use App\Models\Irs;
 
 class MahasiswaIrsSeeder extends Seeder
 {
@@ -12,6 +15,53 @@ class MahasiswaIrsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $allMahasiswa = DB::table('mahasiswa')->get();
+        $mahasiswaIRSSeeder = [];
+        $mahasiswaIRSDetailSeeder = [];
+
+        $irsBySemester = [];
+        $allIrs = DB::table('irs')->get();
+
+        foreach ($allIrs as $irs) {
+            $irsBySemester[$irs->semester][] = $irs;
+        };
+
+        $startGeneratedMahasiswaIRSID = 1;
+
+        foreach ($allMahasiswa as $mahasiswa) {
+            for ($i = 0; $i < $mahasiswa->semester_berjalan; $i++) {
+                $semesterSeeder = $i + 1;
+
+                if (!isset($irsBySemester[$semesterSeeder]) || $semesterSeeder >= $mahasiswa->semester_berjalan) {
+                    continue;
+                }
+
+                $replaceStatus = 'Belum Diapprove';
+
+                if ($semesterSeeder < $mahasiswa->semester_berjalan) {
+                    $replaceStatus = 'Approved';
+                }
+
+                $mahasiswaIrsId = $startGeneratedMahasiswaIRSID + 1;
+                $startGeneratedMahasiswaIRSID += 1;
+
+                $mahasiswaIRSSeeder[] = [
+                    'id' => $mahasiswaIrsId,
+                    'nim' => $mahasiswa->nim,
+                    'status' => $replaceStatus,
+                    'semester' => $semesterSeeder,
+                ];
+
+                foreach ($irsBySemester[$semesterSeeder] as $availIrsOnThisSemster) {
+                    $mahasiswaIRSDetailSeeder[] = [
+                        'mahasiswa_irs_id' => $mahasiswaIrsId,
+                        'kode_irs' => $availIrsOnThisSemster->kode
+                    ];
+                }
+            }
+        }
+
+        DB::table('mahasiswa_irs')->insert($mahasiswaIRSSeeder);
+        DB::table('mahasiswa_irs_detail')->insert($mahasiswaIRSDetailSeeder);
     }
 }

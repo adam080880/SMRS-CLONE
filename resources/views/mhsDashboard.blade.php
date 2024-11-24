@@ -10,7 +10,7 @@
   {{-- End Sidebar --}}
 
   {{-- Main Content --}}
-  <div id="main-content" class="flex-1 p-8 bg-red-300 min-h-screen h-full ml-[360px]">
+  <div id="main-content" class="flex-1 p-8 bg-red-300 min-h-screen h-full overflow-auto ml-[360px]">
 
     <!-- Navbar -->
     <div class="flex-1 bg-white px-[24px] py-[12px] rounded-[20px] mb-[40px] shadow-lg">
@@ -18,8 +18,8 @@
         <div class="flex flex-1 gap-[16px] items-center flex-row">
           <img src="{{ asset('alip.jpg') }}" class="w-[52px] h-[52px] rounded-full" />
           <div class="flex-1 flex flex-col">
-            <span class="text-[24px] text-[#101828]">Mochammad Qaynan Mahdaviqya</span>
-            <span class="text-[18px] text-[#101828]">NIP : 24060122140170</span>
+            <span class="text-[24px] text-[#101828]">{{$userName}}</span>
+            <span class="text-[18px] text-[#101828]">NIM : {{$mahasiswa->nim}}</span>
           </div>
         </div>
 
@@ -42,9 +42,9 @@
       <div class="flex flex-col items-center justify-center mb-[40px]">
         <div class="flex flex-row items-center gap-[10px]">
           <img src="{{ asset('icons/MahasiswaDashboard/User.png') }}" alt="" class="w-[24px] h-[23.07px]">
-          <span class="text-[24px] font-[500]">Dosen Wali : Dr. Sutikno S.T., M.CS.</span>
+          <span class="text-[24px] font-[500]">Dosen Wali : {{$dosenPA->nama}}</span>
         </div>
-        <span class="text-[24px] font-[500]">(NIP : 197905242009121003)</span>
+        <span class="text-[24px] font-[500]">(NIP : {{$dosenPA->nip}})</span>
       </div>
 
       <table class="table-fixed w-full">
@@ -59,14 +59,14 @@
             <div
               class="flex flex-col items-center justify-center gap-[8px] border-[2px] border-collapse border-t-0 border-b-0">
               <span class="text-[14px] font-[500]">Semester Studi</span>
-              <span class="text-[32px] font-[500]">5</span>
+              <span class="text-[32px] font-[500]">{{$mahasiswa->semester_berjalan}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-center gap-[8px]">
               <span class="text-[14px] font-[500]">Status Akademik</span>
               <div class="px-[12px] rounded-xl py-[4px] bg-[#00FF66]">
-                <span class="text-[24px] font-[700] text-[#FFF]">AKTIF</span>
+                <span class="text-[24px] font-[700] text-[#FFF] uppercase">{{$mahasiswa->status}}</span>
               </div>
             </div>
           </td>
@@ -97,7 +97,7 @@
             </div>
           </a>
 
-          <a href="{{ route('perwalian.list') }}">
+          <a href="{{ route('mahasiswa.irs') }}">
             <div class="min-w-[580px] p-[20px] shadow-md rounded-[20px] hover:shadow-inner">
               <div class="flex flex-row items-center gap-[8px] w-full">
                 <div class="flex flex-row items-center flex-1">
@@ -135,14 +135,14 @@
           <td>
             <div class="flex flex-col items-center justify-center gap-[8px]">
               <span class="text-[14px] font-[500]">IPK</span>
-              <span class="text-[32px] font-[500]">3.5</span>
+              <span class="text-[32px] font-[500]">{{$mahasiswa->ipk}}</span>
             </div>
           </td>
           <td>
             <div
               class="flex flex-col items-center justify-center gap-[8px] border-[2px] border-collapse border-t-0 border-b-0 border-r-0">
               <span class="text-[14px] font-[500]">SKSk</span>
-              <span class="text-[32px] font-[500]">80</span>
+              <span class="text-[32px] font-[500]">{{$totalSKSMahasiswa}}</span>
             </div>
           </td>
         </table>
@@ -151,7 +151,6 @@
 
   </div>
   <!-- End Task Board -->
-</div>
 </div>
 
 <script>

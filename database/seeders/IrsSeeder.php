@@ -28,9 +28,18 @@ class IrsSeeder extends Seeder
             ['kode' => 'PEMDAS01', 'mata_kuliah' => 'Dasar Pemrograman 1', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'A204', 'status' => 'BARU', 'nama_dosen' => 'Dr.Eng. Adi Wibowo, S.Si., M.Kom. Khadijah, S.Kom., M.Cs.', 'hari_jam' => 'Senin pukul 15:40 - 18:10', 'semester' => 1],
             ['kode' => 'PEMDAS02', 'mata_kuliah' => 'Dasar Pemrograman 2', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'B201', 'status' => 'BARU', 'nama_dosen' => 'Prof. Dr. Dra. Sunarsih, M.Si. Solikhin, S.Si., M.Sc.', 'hari_jam' => 'Selasa pukul 13:00 - 14:40', 'semester' => 2],
             ['kode' => 'PEMDAS03', 'mata_kuliah' => 'Dasar Pemrograman 3', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E101', 'status' => 'BARU', 'nama_dosen' => 'Dra. Endang Kumaidah, M.Kes.', 'hari_jam' => 'Rabu pukul 07:00 - 07:50', 'semester' => 3],
+            ['kode' => 'PEMDAS04', 'mata_kuliah' => 'Dasar Pemrograman 4', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E101', 'status' => 'BARU', 'nama_dosen' => 'Dra. Endang Kumaidah, M.Kes.', 'hari_jam' => 'Rabu pukul 07:00 - 07:50', 'semester' => 4],
             ['kode' => 'STRDAT01', 'mata_kuliah' => 'Struktur Data 1', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E101', 'status' => 'BARU', 'nama_dosen' => 'Dra. R.A.J. Atrinawati, M.Hum.', 'hari_jam' => 'Rabu pukul 08:50 - 10:30', 'semester' => 1],
             ['kode' => 'STRDAT02', 'mata_kuliah' => 'Struktur Data 2', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Dr. Retno Kusumaningrum, S.Si., M.Kom. Priyo Sidik Sasongko, S.Si., M.Kom. Dr. Aris Sugiharto, S.Si., M.Kom.', 'hari_jam' => 'Selasa pukul 13:00 - 15:30', 'semester' => 2],
             ['kode' => 'STRDAT03', 'mata_kuliah' => 'Struktur Data 3', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Selasa pukul 15:40 - 17:20', 'semester' => 3],
+            ['kode' => 'STRDAT04', 'mata_kuliah' => 'Struktur Data 4', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Selasa pukul 15:40 - 17:20', 'semester' => 4],
+            
+            ['kode' => 'STRDAT05', 'mata_kuliah' => 'Struktur Data 5', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Selasa pukul 15:40 - 17:20', 'semester' => 5],
+            ['kode' => 'PEMDAS05', 'mata_kuliah' => 'Dasar Pemrograman 5', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Rabu pukul 15:40 - 17:20', 'semester' => 5],
+            ['kode' => 'DEEPLN05', 'mata_kuliah' => 'Deep Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Selasa pukul 14:00 - 15:40', 'semester' => 5],
+            ['kode' => 'MLLN0005', 'mata_kuliah' => 'Machine Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Rabu pukul 14:00 - 15:40', 'semester' => 5],
+            ['kode' => 'TPLA0005', 'mata_kuliah' => 'Topologi Jaringan Advanced', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Kamis pukul 15:40 - 17:20', 'semester' => 5],
+
         ]);
     }
 }

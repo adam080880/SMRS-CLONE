@@ -4,7 +4,7 @@
 
 @section('page')
 
-<div class="flex h-screen">
+<div class="flex h-auto">
     {{-- Sidebar --}}
     <x-side-bar :active="request()->route()->getName()"></x-side-bar>
     {{-- End Sidebar --}}
@@ -18,8 +18,8 @@
           <div class="flex flex-1 gap-[16px] items-center flex-row">
             <img src="{{ asset('alip.jpg') }}" class="w-[52px] h-[52px] rounded-full" />
             <div class="flex-1 flex flex-col">
-              <span class="text-[24px] text-[#101828]">Mochammad Qaynan Mahdaviqya</span>
-              <span class="text-[18px] text-[#101828]">NIP : 24060122140170</span>
+              <span class="text-[24px] text-[#101828]">{{$userName}}</span>
+              <span class="text-[18px] text-[#101828]">NIP : {{ $dosen->nip }}</span>
             </div>
           </div>
 
@@ -45,22 +45,17 @@
       <div class="rounded-[20px] p-[25px] pb-[38px] bg-white shadow-lg">
         <span class="text-[30px]">Detail IRS</span>
 
-        <div class="mb-[30px]">
+        <div class="mb-[20px] mt-[10px]">
           <table>
             <tr>
               <td><span class="text-[18px] font-[500]">Nama</span></td>
               <td><span class="text-[18px] font-[500] px-1">:</span></td>
-              <td><span class="text-[18px] font-[500]">Thoriz</span></td>
+              <td><span class="text-[18px] font-[500]">{{$mahasiswa->nama}}</span></td>
             </tr>
             <tr>
               <td><span class="text-[18px] font-[500]">NIM</span></td>
               <td><span class="text-[18px] font-[500] px-1">:</span></td>
-              <td><span class="text-[18px] font-[500]">1231232112</span></td>
-            </tr>
-            <tr>
-              <td><span class="text-[18px] font-[500]">Pembimbing Akademik</span></td>
-              <td><span class="text-[18px] font-[500] px-1">:</span></td>
-              <td><span class="text-[18px] font-[500]">Test aja sih ini, S.d</span></td>
+              <td><span class="text-[18px] font-[500]">{{$mahasiswa->nim}}</span></td>
             </tr>
           </table>
         </div>
@@ -77,24 +72,30 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">1.</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Senin</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Pengembangan Database</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">E101</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">13:00 s/d 16:20</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">2.0</td>
-            </tr>
-            <tr>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">2.</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Selasa</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">Olahraga</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">E102</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">15:00 s/d 16:20</td>
-              <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">2.0</td>
-            </tr>
+            @php($i = 0)
+            @foreach ($mahasiswaIrsTerpilih as $irs)
+              <tr>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{++$i}}.</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{explode(' ', trim($irs->hari_jam))[0]}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$irs->mata_kuliah}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$irs->kode}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{str_replace("-", "s/d", explode(' ', trim($irs->hari_jam), 3)[2])}}</td>
+                <td class="py-3 px-4 text-center border-collapse border-[2px] border-[#000]">{{$irs->sks}}</td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
+
+        @if ($mahasiswa->status_pengajuan !== 'Approved')
+          <div class="w-full flex flex-row mt-[30px]">
+            <div class="flex-1 flex justify-center items-center">
+              <button class="rounded-[10px] w-[230px] h-[50px] bg-[#FFAAAA] text-[#922929]" onclick="reject()">Reject</button>
+            </div>
+            <div class="flex-1 flex justify-center items-center" onclick="approve()">
+              <button class="rounded-[10px] w-[230px] h-[50px] bg-[#AAFFCC] text-[#299233]">Accept</button>
+            </div>
+          </div>
+        @endif
       </div>
     </div>
 </div>
@@ -125,6 +126,58 @@
     const sidebarWidth = document.querySelector('aside')?.clientWidth;
     document.querySelector('#main-content').style.marginLeft = `${(sidebarWidth)}px`;
   };
+
+  const approve = async function () {
+    if (!window.confirm('Apakah Anda yakin approve irs ini?')) {
+      return;
+    }
+
+    const payload = {
+      _token: "{{csrf_token()}}"
+    };
+
+    const response = await fetch("{{ route('api.pa.irs.approve', ['nim' => $mahasiswa->nim ]) }}", {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
+      },
+    });
+
+    if (response.ok) {
+      alert('Berhasil approve irs');
+
+      window.location.href = "{{route('perwalian.list')}}";
+    } else {
+      alert('Server Error');
+    }
+  }
+
+  const reject = async function () {
+    if (!window.confirm('Apakah Anda yakin reject irs ini?')) {
+      return;
+    }
+
+    const payload = {
+      _token: "{{csrf_token()}}"
+    };
+
+    const response = await fetch("{{ route('api.pa.irs.reject', ['nim' => $mahasiswa->nim ]) }}", {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
+      },
+    });
+
+    if (response.ok) {
+      alert('Berhasil reject irs');
+
+      window.location.href = "{{route('perwalian.list')}}";
+    } else {
+      alert('Server Error');
+    }
+  }
 </script>
 
 @endsection
