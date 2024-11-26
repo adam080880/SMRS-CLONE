@@ -84,7 +84,7 @@
         </div>
 
         <div class="flex flex-col gap-[40px]">
-          <a href="{{ route('perwalian.list') }}">
+          <a href="{{ route('mahasiswa.jadwal') }}">
             <div class="min-w-[580px] p-[20px] shadow-md rounded-[20px] hover:shadow-inner">
               <div class="flex flex-row items-center gap-[8px] w-full">
                 <div class="flex flex-row items-center flex-1">
@@ -110,7 +110,7 @@
             </div>
           </a>
 
-          <a href="{{ route('perwalian.list') }}">
+          <a href="{{ route('mahasiswa.khs') }}">
             <div class="min-w-[580px] p-[20px] shadow-md rounded-[20px] hover:shadow-inner">
               <div class="flex flex-row items-center gap-[8px] w-full">
                 <div class="flex flex-row items-center flex-1">
@@ -135,14 +135,14 @@
           <td>
             <div class="flex flex-col items-center justify-center gap-[8px]">
               <span class="text-[14px] font-[500]">IPK</span>
-              <span class="text-[32px] font-[500]">{{$mahasiswa->ipk}}</span>
+              <span class="text-[32px] font-[500]">{{$ipk->ipk}}</span>
             </div>
           </td>
           <td>
             <div
               class="flex flex-col items-center justify-center gap-[8px] border-[2px] border-collapse border-t-0 border-b-0 border-r-0">
               <span class="text-[14px] font-[500]">SKSk</span>
-              <span class="text-[32px] font-[500]">{{$totalSKSMahasiswa}}</span>
+              <span class="text-[32px] font-[500]">{{$ipk->totalSksTelahDiambil}}</span>
             </div>
           </td>
         </table>

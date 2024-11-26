@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use StdClass;
 
 class MahasiswaController extends Controller
 {
@@ -23,9 +24,82 @@ class MahasiswaController extends Controller
         ];
     }
 
+    private function getMahasiswaIps($nim, $semester)
+    {
+        $getAllKhsSemesterBelow = DB::table('khs')
+            ->select(DB::raw('MAX(bobot) as max_bobot'), 'khs.kode', 'irs.sks', 'khs.semester')
+            ->where('khs.nim', $nim)
+            ->where('khs.semester', '=', $semester)
+            ->join('irs', 'khs.kode', '=', 'irs.kode')
+            ->orderBy('khs.bobot', 'desc')
+            ->groupBy('irs.kode')
+            ->get();
+
+        $totalSksTelahDiambil = 0;
+        $totalSksBobotIps = 0;
+
+        foreach ($getAllKhsSemesterBelow as $khsBefore) {
+            $totalSksTelahDiambil += $khsBefore->sks;
+            $totalSksBobotIps += ($khsBefore->sks * $khsBefore->max_bobot);
+        }
+
+        if (count($getAllKhsSemesterBelow) > 0) {
+            $ips = round($totalSksBobotIps / $totalSksTelahDiambil, 2);
+        } else {
+            $ips = 0;
+        }
+
+        $returnFunction = new StdClass();
+        $returnFunction->ips = $ips;
+        $returnFunction->totalSksBobotIps = $totalSksBobotIps;
+        $returnFunction->totalSksTelahDiambil = $totalSksTelahDiambil;
+
+        $returnFunction->maxBebanSksYangDapatDiambil = 18;
+
+        if ($ips >= 2 && $ips < 2.5) {
+            $returnFunction->maxBebanSksYangDapatDiambil = 20;
+        } else if ($ips >= 2.5 && $ips < 3) {
+            $returnFunction->maxBebanSksYangDapatDiambil = 22;
+        } else if ($ips >= 3) {
+            $returnFunction->maxBebanSksYangDapatDiambil = 24;
+        }
+
+        return $returnFunction;
+    }
+
+    private function getMahasiswaIpkAndSksk($nim, $semester)
+    {
+        $getAllKhsSemesterBelow = DB::table('khs')
+            ->select(DB::raw('MAX(bobot) as max_bobot'), 'khs.kode', 'irs.sks', 'khs.semester')
+            ->where('khs.nim', $nim)
+            ->where('khs.semester', '<=', $semester)
+            ->join('irs', 'khs.kode', '=', 'irs.kode')
+            ->orderBy('khs.bobot', 'desc')
+            ->groupBy('irs.kode')
+            ->get();
+
+        $totalSksTelahDiambil = 0;
+        $totalSksBobotIpk = 0;
+
+        foreach ($getAllKhsSemesterBelow as $khsBefore) {
+            $totalSksTelahDiambil += $khsBefore->sks;
+            $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+        }
+
+        $ipk = round($totalSksBobotIpk / $totalSksTelahDiambil, 2);
+
+        $returnFunction = new StdClass();
+        $returnFunction->ipk = $ipk;
+        $returnFunction->totalSksBobotIpk = $totalSksBobotIpk;
+        $returnFunction->totalSksTelahDiambil = $totalSksTelahDiambil;
+
+        return $returnFunction;
+    }
+
     public function dashboard()
     {
         $authDetail = $this->getMahasiswaAndUser();
+        $ipk = $this->getMahasiswaIpkAndSksk($authDetail['mahasiswa']->nim, $authDetail['mahasiswa']->semester_berjalan);
 
         $dosenPA = DB::table('dosen')->where('nip', $authDetail['mahasiswa']->pa_nip)->first();
 
@@ -39,7 +113,8 @@ class MahasiswaController extends Controller
             'userName' => $authDetail['mahasiswa']->nama,
             'mahasiswa' => $authDetail['mahasiswa'],
             'dosenPA' => $dosenPA,
-            'totalSKSMahasiswa' => $total_sks_mahasiswa
+            'totalSKSMahasiswa' => $total_sks_mahasiswa,
+            'ipk' => $ipk,
         ];
 
         return view('mhsDashboard', $data);
@@ -70,6 +145,8 @@ class MahasiswaController extends Controller
     public function mahasiswaIrsCreate()
     {
         $authDetail = $this->getMahasiswaAndUser();
+        $ipkAndSksk = $this->getMahasiswaIpkAndSksk($authDetail['mahasiswa']->nim, $authDetail['mahasiswa']->semester_berjalan);
+        $ips = $this->getMahasiswaIps($authDetail['mahasiswa']->nim, $authDetail['mahasiswa']->semester_berjalan - 1);
 
         $total_sks_mahasiswa = DB::table('mahasiswa_irs')
             ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
@@ -99,6 +176,8 @@ class MahasiswaController extends Controller
             'totalSKSMahasiswa' => $total_sks_mahasiswa,
             'irsTersedia' => $irs_tersedia,
             'irsTerpilih' => $irs_terpilih,
+            'ipkAndSksk' => $ipkAndSksk,
+            'ips' => $ips,
         ];
 
         return view('mhsDashboardCreateIrs', $data);
@@ -151,34 +230,143 @@ class MahasiswaController extends Controller
         return view('mhsDashboardKhs', $data);
     }
 
-    public function mahasiswaKhsDetail($semester)
+    public function mahasiswaKhsDetail(Request $request, $semester)
     {
+        $uri = $request->path();
+        $isPrint = false;
+
+        if (str_contains($uri, "print")) {
+            $isPrint = true;
+        }
+
         $authDetail = $this->getMahasiswaAndUser();
 
         $mahasiswaIrsSemester = DB::table('mahasiswa_irs')
             ->where('mahasiswa_irs.nim', $authDetail['mahasiswa']->nim)
             ->where('mahasiswa_irs.semester', $semester)
             ->first();
-        $mahasiswaIrs = DB::table('mahasiswa_irs')
-            ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
-            ->join('irs', 'irs.kode', '=', 'mahasiswa_irs_detail.kode_irs')
-            ->where('mahasiswa_irs.id', $mahasiswaIrsSemester->id)
+
+        $mahasiswaIrs = [];
+
+        if ($mahasiswaIrsSemester) {
+            $mahasiswaIrs = DB::table('mahasiswa_irs')
+                ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
+                ->join('irs', 'irs.kode', '=', 'mahasiswa_irs_detail.kode_irs')
+                ->join('khs', function($join) {
+                    $join->on('khs.kode', '=', 'mahasiswa_irs_detail.kode_irs');
+                    $join->on('khs.semester', '=', 'mahasiswa_irs.semester');
+                    $join->on('khs.nim', '=', 'mahasiswa_irs.nim');
+                })
+                ->where('mahasiswa_irs.id', $mahasiswaIrsSemester->id)
+                ->where('khs.semester', $semester)
+                ->get();
+        }
+
+        $getAllKhsSemesterBelow = DB::table('khs')
+            ->select(DB::raw('MAX(bobot) as max_bobot'), 'khs.kode', 'irs.sks', 'khs.semester')
+            ->where('khs.nim', $authDetail['mahasiswa']->nim)
+            ->where('khs.semester', '<=', $semester)
+            ->join('irs', 'khs.kode', '=', 'irs.kode')
+            ->orderBy('khs.bobot', 'desc')
+            ->groupBy('irs.kode')
             ->get();
         
         $totalSksSemesterIni = 0;
+        $totalBobot = 0;
+        $totalSksBobot = 0;
+
         foreach ($mahasiswaIrs as $irs) {
             $totalSksSemesterIni += $irs->sks;
+            $totalBobot += $irs->bobot;
+
+            $totalSksBobot += ($irs->sks * $irs->bobot);
         }
 
+        if ($mahasiswaIrsSemester && count($mahasiswaIrs) > 0) {
+            $ips = $totalSksBobot / $totalSksSemesterIni;
+        } else {
+            $ips = 0;
+        }
+
+        $totalSksTelahDiambil = 0;
+        $totalSksBobotIpk = 0;
+
+        foreach ($getAllKhsSemesterBelow as $khsBefore) {
+            $totalSksTelahDiambil += $khsBefore->sks;
+            $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+        }
+
+        $ipk = $totalSksBobotIpk / $totalSksTelahDiambil;
+
         $data = [
+            'isPrint' => $isPrint,
             'userName' => $authDetail['mahasiswa']->nama,
             'mahasiswa' => $authDetail['mahasiswa'],
             'mahasiswaIrsSemester' => $mahasiswaIrsSemester,
             'mahasiswaIrs' => $mahasiswaIrs,
             'totalSksSemesterIni' => $totalSksSemesterIni,
+            'totalSksBobot' => $totalSksBobot,
+            'totalBobot' => $totalBobot,
+            'ips' => round($ips, 2),
+
+            'semester' => $semester,
+            'totalSksBobotIpk' => $totalSksBobotIpk,
+            'totalSksTelahDiambil' => $totalSksTelahDiambil,
+            'ipk' => round($ipk, 2),
         ];
 
         return view('mhsDashboardKhsDetail', $data);
+    }
+
+    public function mahasiswaJadwal(Request $request)
+    {
+        $uri = $request->path();
+        $isPrint = false;
+
+        if (str_contains($uri, "print")) {
+            $isPrint = true;
+        }
+
+        $authDetail = $this->getMahasiswaAndUser();
+        $semester = $authDetail['mahasiswa']->semester_berjalan;
+
+        $mahasiswaIrsSemester = DB::table('mahasiswa_irs')
+            ->where('mahasiswa_irs.nim', $authDetail['mahasiswa']->nim)
+            ->where('mahasiswa_irs.semester', $semester)
+            ->first();
+
+        $mahasiswaIrs = [];
+
+        if ($mahasiswaIrsSemester) {
+            $mahasiswaIrs = DB::table('mahasiswa_irs')
+                ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
+                ->join('irs', 'irs.kode', '=', 'mahasiswa_irs_detail.kode_irs')
+                ->where('mahasiswa_irs.id', $mahasiswaIrsSemester->id)
+                ->get();
+        }
+
+        $data = [
+            'isPrint' => $isPrint,
+            'userName' => $authDetail['mahasiswa']->nama,
+            'mahasiswa' => $authDetail['mahasiswa'],
+            'mahasiswaIrsSemester' => $mahasiswaIrsSemester,
+            'mahasiswaIrs' => $mahasiswaIrs,
+            'semester' => $semester,
+        ];
+
+        return view('mhsDashboardJadwal', $data);
+    }
+
+    public function registrasi()
+    {
+        $authDetail = $this->getMahasiswaAndUser();
+
+        $data = [
+            'userName' => $authDetail['mahasiswa']->nama,
+            'mahasiswa' => $authDetail['mahasiswa'],
+        ];
+
+        return view('mhsRegistrasi', $data);
     }
 
     public function createMahasiswaIrs(Request $request)

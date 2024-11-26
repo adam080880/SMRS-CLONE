@@ -18,6 +18,12 @@ class MahasiswaIrsSeeder extends Seeder
         $allMahasiswa = DB::table('mahasiswa')->get();
         $mahasiswaIRSSeeder = [];
         $mahasiswaIRSDetailSeeder = [];
+        $generateKhsRandomSeeder = [];
+        $nilaiOptions = ['A', 'B'];
+        $bobot = [
+            'A' => 4,
+            'B' => 3,
+        ];
 
         $irsBySemester = [];
         $allIrs = DB::table('irs')->get();
@@ -57,11 +63,22 @@ class MahasiswaIrsSeeder extends Seeder
                         'mahasiswa_irs_id' => $mahasiswaIrsId,
                         'kode_irs' => $availIrsOnThisSemster->kode
                     ];
+
+                    $nilai = $nilaiOptions[array_rand($nilaiOptions)];
+
+                    $generateKhsRandomSeeder[] = [
+                        'nim' => $mahasiswa->nim,
+                        'nilai' => $nilai,
+                        'bobot' => $bobot[$nilai],
+                        'kode' => $availIrsOnThisSemster->kode,
+                        'semester' => $semesterSeeder,
+                    ];
                 }
             }
         }
 
         DB::table('mahasiswa_irs')->insert($mahasiswaIRSSeeder);
         DB::table('mahasiswa_irs_detail')->insert($mahasiswaIRSDetailSeeder);
+        DB::table('khs')->insert($generateKhsRandomSeeder);
     }
 }

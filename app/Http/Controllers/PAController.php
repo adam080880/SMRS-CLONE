@@ -61,7 +61,7 @@ class PAController extends Controller
 
         $mahasiswa = DB::table('mahasiswa')
             ->select('mahasiswa.*', 'mahasiswa_irs.status as status_pengajuan')
-            ->join('mahasiswa_irs', function($join) {
+            ->leftJoin('mahasiswa_irs', function($join) {
                 $join->on('mahasiswa_irs.nim', '=', 'mahasiswa.nim');
                 $join->on('mahasiswa_irs.semester', '=', 'mahasiswa.semester_berjalan');
             })
@@ -69,13 +69,17 @@ class PAController extends Controller
             ->where('mahasiswa.nim', $nim)
             ->first();
 
-        $mahasiswaIrsTerpilih = DB::table('irs')
-            ->join('mata_kuliah', 'mata_kuliah.kodemk', '=', 'irs.kode')
-            ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.kode_irs', '=', 'irs.kode')
-            ->join('mahasiswa_irs', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
-            ->where('mahasiswa_irs.semester', $mahasiswa->semester_berjalan)
-            ->where('mahasiswa_irs.nim', $nim)
-            ->get();
+        $mahasiswaIrsTerpilih = [];
+
+        if ($mahasiswa) {
+            $mahasiswaIrsTerpilih = DB::table('irs')
+                ->join('mata_kuliah', 'mata_kuliah.kodemk', '=', 'irs.kode')
+                ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.kode_irs', '=', 'irs.kode')
+                ->join('mahasiswa_irs', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
+                ->where('mahasiswa_irs.semester', $mahasiswa->semester_berjalan)
+                ->where('mahasiswa_irs.nim', $nim)
+                ->get();
+        }
 
         $data = [
             'userName' => $authDetail['user']->name,

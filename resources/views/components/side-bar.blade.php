@@ -86,6 +86,34 @@
               </button>
           </li>
       @endif
+
+      <!-- Mahasiswa (Mahasiswa role) -->
+      @if($user->mhs == 1)
+          <li class="mb-4">
+              <button onclick="location.href='{{ route('mahasiswa.registrasi') }}'" class="flex items-center w-full text-gray-700 bg-gray-300 shadow-2xl rounded-lg p-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-10S17.523 2 12 2z" />
+                  </svg>
+                  Registrasi
+              </button>
+          </li>
+          <li class="mb-4">
+              <button onclick="location.href='{{ route('mahasiswa.irs') }}'" class="flex items-center w-full text-gray-700 bg-gray-300 shadow-2xl rounded-lg p-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-10S17.523 2 12 2z" />
+                  </svg>
+                  Akademik
+              </button>
+          </li>
+          <li class="mb-4">
+              <button onclick="location.href='{{ route('mahasiswa.jadwal') }}'" class="flex items-center w-full text-gray-700 bg-gray-300 shadow-2xl rounded-lg p-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-10S17.523 2 12 2z" />
+                  </svg>
+                  Jadwal Kuliah
+              </button>
+          </li>
+      @endif
       
       
   </ul>

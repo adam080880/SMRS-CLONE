@@ -141,10 +141,14 @@ Route::post('/perwalian/irs/reject/{nim}', [PAController::class, 'rejectIrs'])->
 Route::post('/perwalian/irs/approve/{nim}', [PAController::class, 'approveIrs'])->name('api.pa.irs.approve');
 
 // Mahasiswa IRS
+Route::get('/mahasiswa/registrasi', [MahasiswaController::class, 'registrasi'])->name('mahasiswa.registrasi');
+Route::get('/mahasiswa/jadwal', [MahasiswaController::class, 'mahasiswaJadwal'])->name('mahasiswa.jadwal');
+Route::get('/mahasiswa/jadwal/print', [MahasiswaController::class, 'mahasiswaJadwal'])->name('mahasiswa.jadwal.print');
 Route::get('/mahasiswa/irs', [MahasiswaController::class, 'mahasiswaIrs'])->name('mahasiswa.irs');
 Route::get('/mahasiswa/irs/create', [MahasiswaController::class, 'mahasiswaIrsCreate'])->name('mahasiswa.irs.create');
 Route::get('/mahasiswa/irs/{semester}', [MahasiswaController::class, 'mahasiswaIrsDetail'])->name('mahasiswa.irs.detail');
 Route::get('/mahasiswa/khs', [MahasiswaController::class, 'mahasiswaKhs'])->name('mahasiswa.khs');
+Route::get('/mahasiswa/khs/print/{semester}', [MahasiswaController::class, 'mahasiswaKhsDetail'])->name('mahasiswa.khs.detail.print');
 Route::get('/mahasiswa/khs/{semester}', [MahasiswaController::class, 'mahasiswaKhsDetail'])->name('mahasiswa.khs.detail');
 
 Route::post('/mahasiswa/irs/create', [MahasiswaController::class, 'createMahasiswaIrs'])->name('api.mahasiswa.irs.create');

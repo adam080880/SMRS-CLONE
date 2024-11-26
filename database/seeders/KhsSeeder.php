@@ -13,17 +13,17 @@ class KhsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('khs')->insert([
-            [
-                'nim' => '24060122140131',
-                'kode' => 'PAIK6102',
-                'nilai' => 'A',
-            ],
-            [
-                'nim' => '24060122140174',
-                'kode' => 'PAIK6501',
-                'nilai' => 'A',
-            ]
-        ]);
+        // DB::table('khs')->insert([
+        //     [
+        //         'nim' => '24060122140131',
+        //         'kode' => 'PAIK6102',
+        //         'nilai' => 'A',
+        //     ],
+        //     [
+        //         'nim' => '24060122140174',
+        //         'kode' => 'PAIK6501',
+        //         'nilai' => 'A',
+        //     ]
+        // ]);
     }
 }

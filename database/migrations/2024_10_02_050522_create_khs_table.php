@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nim');
             $table->string('kode');
-            $table->char('nilai');
+            $table->string('nilai');
+            $table->integer('bobot');
+            $table->integer('semester');
             $table->timestamps();
         });
     }

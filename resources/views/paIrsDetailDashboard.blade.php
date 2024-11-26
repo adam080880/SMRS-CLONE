@@ -86,7 +86,7 @@
           </tbody>
         </table>
 
-        @if ($mahasiswa->status_pengajuan !== 'Approved')
+        @if ($mahasiswa->status_pengajuan !== 'Approved' && $mahasiswa->status_pengajuan !== null)
           <div class="w-full flex flex-row mt-[30px]">
             <div class="flex-1 flex justify-center items-center">
               <button class="rounded-[10px] w-[230px] h-[50px] bg-[#FFAAAA] text-[#922929]" onclick="reject()">Reject</button>

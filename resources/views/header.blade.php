@@ -15,7 +15,19 @@
     {{-- jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
+    <style>
+        @media print {
+            body {-webkit-print-color-adjust: exact;}
 
+            @page {
+                margin: 0;
+            }
+
+            * {
+                page-break-after: always;
+            }
+        }
+    </style>
 
     {{-- datatables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css" />

@@ -94,13 +94,13 @@
                   <div
                     class="flex flex-col items-center justify-center gap-[8px] border-[black] border-[1px] border-collapse border-t-0 border-b-0">
                     <span class="text-[14px] text-gray-500 font-[500] text-center">IPK</span>
-                    <span class="text-[18px] font-[500] text-center">{{$mahasiswa->ipk}}</span>
+                    <span class="text-[18px] font-[500] text-center">{{$ipkAndSksk->ipk}}</span>
                   </div>
                 </td>
                 <td>
                   <div class="flex flex-col items-center justify-center gap-[8px]">
                     <span class="text-[14px] text-gray-500 font-[500] text-center">SKSk</span>
-                    <span class="text-[18px] font-[500] text-center">{{$totalSKSMahasiswa}}</span>
+                    <span class="text-[18px] font-[500] text-center">{{$ipkAndSksk->totalSksTelahDiambil}}</span>
                   </div>
                 </td>
               </tr>
@@ -109,7 +109,7 @@
                 <td colSpan="3">
                   <div class="flex flex-col items-center justify-center gap-[8px] pt-[16px]">
                     <span class="text-[14px] text-gray-500 font-[500] text-center">Maks Beban SKS</span>
-                    <span class="text-[18px] font-[500] text-center">18</span>
+                    <span class="text-[18px] font-[500] text-center">{{$ips->maxBebanSksYangDapatDiambil}}</span>
                   </div>
                 </td>
               </tr>
@@ -199,6 +199,7 @@
 </div>
 
 <script>
+  const maxSks = {{$ips->maxBebanSksYangDapatDiambil}};
   const availIrsOptions = @json($irsTersedia);
   let selectedIrsOptions = @json($irsTerpilih);
 
@@ -311,8 +312,15 @@
         irs: [],
       };
 
+      let totalSks = 0;
+
       for (const selectedIrsOption of selectedIrsOptions) {
+        totalSks += selectedIrsOption.sks;
         payload.irs.push(selectedIrsOption.kode);
+      }
+
+      if (totalSks > maxSks) {
+        throw Error(`Beban SKS Melebihi batas maksimal, max ${maxSks}`);
       }
 
       const response = await fetch("{{ route('api.mahasiswa.irs.create') }}", {
