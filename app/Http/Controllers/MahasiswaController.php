@@ -81,12 +81,16 @@ class MahasiswaController extends Controller
         $totalSksTelahDiambil = 0;
         $totalSksBobotIpk = 0;
 
-        foreach ($getAllKhsSemesterBelow as $khsBefore) {
-            $totalSksTelahDiambil += $khsBefore->sks;
-            $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+        if (count($getAllKhsSemesterBelow) > 0) {
+            foreach ($getAllKhsSemesterBelow as $khsBefore) {
+                $totalSksTelahDiambil += $khsBefore->sks;
+                $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+            }
+    
+            $ipk = round($totalSksBobotIpk / $totalSksTelahDiambil, 2);
+        } else {
+            $ipk = 0;
         }
-
-        $ipk = round($totalSksBobotIpk / $totalSksTelahDiambil, 2);
 
         $returnFunction = new StdClass();
         $returnFunction->ipk = $ipk;
@@ -291,12 +295,16 @@ class MahasiswaController extends Controller
         $totalSksTelahDiambil = 0;
         $totalSksBobotIpk = 0;
 
-        foreach ($getAllKhsSemesterBelow as $khsBefore) {
-            $totalSksTelahDiambil += $khsBefore->sks;
-            $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+        if (count($getAllKhsSemesterBelow) > 0) {
+            foreach ($getAllKhsSemesterBelow as $khsBefore) {
+                $totalSksTelahDiambil += $khsBefore->sks;
+                $totalSksBobotIpk += ($khsBefore->sks * $khsBefore->max_bobot);
+            }
+    
+            $ipk = round($totalSksBobotIpk / $totalSksTelahDiambil, 2);
+        } else {
+            $ipk = 0;
         }
-
-        $ipk = $totalSksBobotIpk / $totalSksTelahDiambil;
 
         $data = [
             'isPrint' => $isPrint,
