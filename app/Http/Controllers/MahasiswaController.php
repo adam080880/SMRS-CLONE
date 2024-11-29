@@ -160,6 +160,7 @@ class MahasiswaController extends Controller
 
         $irs_tersedia = DB::table('irs')
             ->join('mata_kuliah', 'mata_kuliah.kodemk', '=', 'irs.kode')
+            ->leftJoin('ruang', 'irs.ruang', '=', 'ruang.noruang')
             ->where('mata_kuliah.plotsemester', '<=', $authDetail['mahasiswa']->semester_berjalan)
             ->orderBy(DB::raw("CASE WHEN mata_kuliah.plotsemester = {$authDetail['mahasiswa']->semester_berjalan} THEN 1 ELSE 0 END"), 'DESC')
             ->orderBy('mata_kuliah.plotsemester', 'ASC')
@@ -168,11 +169,42 @@ class MahasiswaController extends Controller
             ->join('mata_kuliah', 'mata_kuliah.kodemk', '=', 'irs.kode')
             ->join('mahasiswa_irs_detail', 'mahasiswa_irs_detail.kode_irs', '=', 'irs.kode')
             ->join('mahasiswa_irs', 'mahasiswa_irs_detail.mahasiswa_irs_id', '=', 'mahasiswa_irs.id')
+            ->leftJoin('ruang', 'irs.ruang', '=', 'ruang.noruang')
             ->where('mahasiswa_irs.semester', $authDetail['mahasiswa']->semester_berjalan)
             ->where('mahasiswa_irs.nim', $authDetail['mahasiswa']->nim)
             ->orderBy(DB::raw("CASE WHEN mata_kuliah.plotsemester = {$authDetail['mahasiswa']->semester_berjalan} THEN 1 ELSE 0 END"), 'DESC')
             ->orderBy('mata_kuliah.plotsemester', 'ASC')
             ->get();
+
+        $all_count_irs_terpilih = DB::table('irs')
+            ->select('irs.kode', DB::raw('COUNT(mahasiswa_irs_detail.id) as count_terisi'))
+            ->leftJoin('mahasiswa_irs_detail', 'mahasiswa_irs_detail.kode_irs', '=', 'irs.kode')
+            ->leftJoin('mahasiswa_irs', 'mahasiswa_irs.id', '=', 'mahasiswa_irs_detail.mahasiswa_irs_id')
+            ->where(function($condition) use ($authDetail) {
+                $condition->where('mahasiswa_irs.nim', '!=', $authDetail['mahasiswa']->nim)
+                    ->orWhereNull('mahasiswa_irs.nim');
+            })
+            ->whereIn('irs.kode', array_column($irs_tersedia->toArray(), 'kode'))
+            ->groupBy('irs.kode')
+            ->get();
+
+        $mapCountIrsTerpilihByKodeIrs = [];
+        foreach ($all_count_irs_terpilih as $count_irs_terpilih) {
+            $mapCountIrsTerpilihByKodeIrs[$count_irs_terpilih->kode] = $count_irs_terpilih;
+        }
+
+        foreach ($irs_tersedia as $irs) {
+            $irs->terisi = 0;
+            if (isset($mapCountIrsTerpilihByKodeIrs[$irs->kode])) {
+                $irs->terisi = $mapCountIrsTerpilihByKodeIrs[$irs->kode]->count_terisi;
+            }
+        }
+        foreach ($irs_terpilih as $irs) {
+            $irs->terisi = 0;
+            if (isset($mapCountIrsTerpilihByKodeIrs[$irs->kode])) {
+                $irs->terisi = $mapCountIrsTerpilihByKodeIrs[$irs->kode]->count_terisi;
+            }
+        }
 
         $data = [
             'userName' => $authDetail['mahasiswa']->nama,

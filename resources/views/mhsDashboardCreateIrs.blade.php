@@ -201,11 +201,12 @@
 <script>
   const maxSks = {{$ips->maxBebanSksYangDapatDiambil}};
   const availIrsOptions = @json($irsTersedia);
+  let selectedIrsOptionsRaw = @json($irsTerpilih);
   let selectedIrsOptions = @json($irsTerpilih);
 
   window.onload = function () {
-    if (selectedIrsOptions.length > 0) {
-      renderSelectedIrs(selectedIrsOptions);
+    if (selectedIrsOptionsRaw.length > 0) {
+      renderSelectedIrsRaw(selectedIrsOptionsRaw);
     }
 
     resizeSidebar();
@@ -221,12 +222,20 @@
   };
 
   const deleteSelectedIrs = function(kode) {
+    selectedIrsOptionsRaw = selectedIrsOptionsRaw.filter((selectedIrsOption) => selectedIrsOption.kodemk !== kode);
     selectedIrsOptions = selectedIrsOptions.filter((selectedIrsOption) => selectedIrsOption.kodemk !== kode);
 
-    renderSelectedIrs(selectedIrsOptions);
+    renderSelectedIrsRaw(selectedIrsOptionsRaw);
   }
 
-  const renderSelectedIrs = function (selectedIrs = selectedIrsOptions) {
+  const handleConfirmIrs = function(kodeIrs) {
+    const irs = availIrsOptions.find((irs) => irs.kode === kodeIrs);
+
+    selectedIrsOptions.push(irs);
+    renderSelectedIrsRaw(selectedIrsOptionsRaw);
+  }
+
+  const renderSelectedIrsRaw = function (selectedIrs = selectedIrsOptionsRaw) {
     const selectIrs = document.querySelectorAll('.select-irs');
 
     selectIrs.forEach((v) => {
@@ -257,12 +266,22 @@
       const [hari, pukul, jam_dari, jam_, jam_ke] = (irs.hari_jam).split(' ');
 
       const renderCard = (reserveHari) => {
+        const choosed = selectedIrsOptions.find((findIrs) => findIrs.kode === irs.kode);
+        const isFull = irs.terisi >= irs.kapasitas;
+
+        const bgColor = isFull ? 'bg-[#FF6161]' : (choosed ? 'bg-[#AAFFCC]' : 'bg-[#F5F5F5]');
+
         return reserveHari.toLowerCase() === hari.toLowerCase() ? `<td class="border border-[black] w-[200px] h-[93px] px-4 py-2">
-          <div class="flex flex-col w-full h-full bg-[#AAFFCC] rounded-[12px] border border-[black] p-2">
+          <div class="flex flex-col w-full h-full ${bgColor} rounded-[12px] border border-[black] p-2">
             <span class="font-bold text-[12px]">${irs.nama}</span>
             <span class="text-gray-800 text-[8px] font-[300]">Semester ${irs.semester} (${irs.sks} SKS)</span>
             <span class="text-gray-800 text-[8px]">${jam_dari} - ${jam_ke}</span>
             <span class="text-gray-800 text-[8px]">${irs.nama_dosen}</span>
+            <span class="text-gray-800 text-[8px]">Kapasitas: ${irs.terisi + (choosed ? 1 : 0)}/${irs.kapasitas}</span>
+
+            <div class="flex flex-row justify-end">
+              <button onclick="${choosed || isFull ? 'javascript:void(0)' : `handleConfirmIrs('${irs.kode}')`}" class="${isFull ? 'bg-[#EC1E1E]' : 'bg-[#D6D6D6]'} py-1 px-2 rounded-[10px] text-[10px]">${isFull ? 'Penuh' : choosed ? 'Dipilih' : 'Pilih'}</button>
+            </div>
           </div>
         </td>` : `<td class="border border-[black] w-[200px] h-[93px] px-4 py-2">
         </td>`;
@@ -292,19 +311,23 @@
       }
     });
 
-    selectedIrsOptions = selectedKode.map((kode) => {
+    selectedIrsOptionsRaw = selectedKode.map((kode) => {
       return availIrsOptions.find((option) => {
         return kode === option.kode;
       });
     });
 
-    renderSelectedIrs(selectedIrsOptions);
+    renderSelectedIrsRaw(selectedIrsOptionsRaw);
   }
 
   const submitIrs = async function() {
     try {
-      if (!selectedIrsOptions.length) {
+      if (!selectedIrsOptionsRaw.length) {
         throw Error('Mohon pilih IRS terlebih dahulu');
+      }
+
+      if (selectedIrsOptions.length != selectedIrsOptionsRaw.length) {
+        throw Error('Ada kartu IRS yang bermasalah dan pilih kartu irs sampai semua kartu irs berwarna hijau');
       }
 
       let payload = {

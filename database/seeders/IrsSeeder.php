@@ -36,9 +36,9 @@ class IrsSeeder extends Seeder
             
             ['kode' => 'STRDAT05', 'mata_kuliah' => 'Struktur Data 5', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Selasa pukul 15:40 - 17:20', 'semester' => 5],
             ['kode' => 'PEMDAS05', 'mata_kuliah' => 'Dasar Pemrograman 5', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno, S.Ag., M.S.I.', 'hari_jam' => 'Rabu pukul 15:40 - 17:20', 'semester' => 5],
-            ['kode' => 'DEEPLN05', 'mata_kuliah' => 'Deep Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Selasa pukul 14:00 - 15:40', 'semester' => 5],
-            ['kode' => 'MLLN0005', 'mata_kuliah' => 'Machine Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Rabu pukul 14:00 - 15:40', 'semester' => 5],
-            ['kode' => 'TPLA0005', 'mata_kuliah' => 'Topologi Jaringan Advanced', 'kelas' => 'D', 'sks' => 4, 'ruang' =>'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Kamis pukul 15:40 - 17:20', 'semester' => 5],
+            ['kode' => 'DEEPLN05', 'mata_kuliah' => 'Deep Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Selasa pukul 14:00 - 15:40', 'semester' => 5],
+            ['kode' => 'MLLN0005', 'mata_kuliah' => 'Machine Learning', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Rabu pukul 14:00 - 15:40', 'semester' => 5],
+            ['kode' => 'TPLA0005', 'mata_kuliah' => 'Topologi Jaringan Advanced', 'kelas' => 'D', 'sks' => 4, 'ruang' => 'E103', 'status' => 'BARU', 'nama_dosen' => 'Suparno S.Ag., M.S.I', 'hari_jam' => 'Kamis pukul 15:40 - 17:20', 'semester' => 5],
 
         ]);
     }
