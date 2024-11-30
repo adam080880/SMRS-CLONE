@@ -59,7 +59,7 @@ class MahasiswaSeeder extends Seeder
                 'ipk' => 3.5,
                 'semester_berjalan' => 1,
                 'alamat' => 'Alfamart Gondang',
-                'status' => 'Aktif',
+                'status' => 'Non Aktif',
                 'pa_nip' => '1234567801',
             ],
             [

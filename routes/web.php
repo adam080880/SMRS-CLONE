@@ -151,4 +151,5 @@ Route::get('/mahasiswa/khs', [MahasiswaController::class, 'mahasiswaKhs'])->name
 Route::get('/mahasiswa/khs/print/{semester}', [MahasiswaController::class, 'mahasiswaKhsDetail'])->name('mahasiswa.khs.detail.print');
 Route::get('/mahasiswa/khs/{semester}', [MahasiswaController::class, 'mahasiswaKhsDetail'])->name('mahasiswa.khs.detail');
 
+Route::post('/mahasiswa/aktivasi', [MahasiswaController::class, 'aktivasi'])->name('api.mahasiswa.aktif');
 Route::post('/mahasiswa/irs/create', [MahasiswaController::class, 'createMahasiswaIrs'])->name('api.mahasiswa.irs.create');

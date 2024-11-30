@@ -414,6 +414,10 @@ class MahasiswaController extends Controller
         try {
             $authDetail = $this->getMahasiswaAndUser();
 
+            if ($authDetail['mahasiswa']->status !== 'Aktif') {
+                throw new Exception('Status Mahasiswa tidak aktif, mohon aktifkan terlebih dahulu di Menu Registrasi.');
+            }
+
             $mahasiswaIrs = DB::table('mahasiswa_irs')
                 ->where('nim', $authDetail['mahasiswa']->nim)
                 ->where('semester', $authDetail['mahasiswa']->semester_berjalan)
@@ -456,6 +460,36 @@ class MahasiswaController extends Controller
 
             return response()->json([
                 'data' => $mahasiswaIrs,
+                'message' => 'success',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'data' => null,
+                'message' => $e->getMessage() ? $e->getMessage() : 'Error internal server error',
+            ]);
+        }
+    }
+
+    public function aktivasi(Request $request)
+    {
+        try {
+            $authDetail = $this->getMahasiswaAndUser();
+
+            DB::table('users')
+                ->where('id', $authDetail['user']->id)
+                ->update([
+                    'status' => 'Aktif'
+                ]);
+
+            DB::table('mahasiswa')
+                ->where('id', $authDetail['mahasiswa']->id)
+                ->update([
+                    'status' => 'Aktif'
+                ]);
+
+            return response()->json([
+                'data' => null,
                 'message' => 'success',
             ]);
         } catch (Exception $e) {

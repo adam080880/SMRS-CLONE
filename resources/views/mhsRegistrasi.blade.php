@@ -47,7 +47,7 @@
 
       <div class="flex flex-row items-start justify-stretch gap-[20px] w-full">
         <div class="py-[16px] px-[20px] min-h-[263px] flex-1 bg-white rounded-[20px] flex flex-col">
-          <span class="text-[24px] mb-[16px]">AKTIF</span>
+          <span class="text-[24px] mb-[16px] uppercase">{{$mahasiswa->status}}</span>
 
           <div class="flex flex-row items-start flex-1">
             <img src="{{ asset('icons/MahasiswaDashboard/BookIcon.png') }}" alt="" style="width: 120px">
@@ -57,7 +57,11 @@
             </div>
           </div>
 
-          <div class="px-[30px] py-[10px] bg-[#E3CBCB] text-[#000] rounded-[10px] self-end">Terpilih</div>
+          @if ($mahasiswa->status === 'Aktif')
+            <div class="px-[30px] py-[10px] bg-[#E3CBCB] text-[#000] rounded-[10px] self-end">Terpilih</div>
+          @else
+            <button onclick="aktifkan()" class="px-[30px] py-[10px] bg-[#E3CBCB] text-[#000] rounded-[10px] self-end">Aktifkan</button>
+          @endif
         </div>
         <div class="py-[16px] px-[20px] min-h-[263px] flex-1 bg-white rounded-[20px] flex flex-col">
           <span class="text-[24px] mb-[16px]">CUTI</span>
@@ -127,6 +131,34 @@
   const resizeSidebar = function () {
     const sidebarWidth = document.querySelector('aside')?.clientWidth;
     document.querySelector('#main-content').style.marginLeft = `${(sidebarWidth)}px`;
+  };
+
+  const aktifkan = async function() {
+    const payload = {
+      _token: "{{ csrf_token() }}",
+    };
+
+    const response = await fetch("{{ route('api.mahasiswa.aktif') }}", {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
+        },
+      });
+
+      if (!response.ok) {
+        throw Error('Internal Server Error');
+      }
+
+      const createRes = await response.json();
+
+      if (createRes.error) {
+        throw Error(createRes.message);
+      }
+      
+      alert('Berhasil aktifkan status mahasiswa');
+
+      window.location.href = '{{route("mahasiswa.registrasi")}}';
   };
 
   const handlePay = function () {

@@ -22,10 +22,10 @@ class UserSeeder extends Seeder
          */
         $user = [
             // Mahasiswa
-            ['name' => 'test1', 'email' => 'Qaynan@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Non Aktif'],
-            ['name' => 'test2', 'email' => 'Thoriq@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
-            ['name' => 'test3', 'email' => 'Lucky@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
-            ['name' => 'test4', 'email' => 'reva@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
+            ['name' => 'Qaynan', 'email' => 'Qaynan@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
+            ['name' => 'Thoriq', 'email' => 'Thoriq@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
+            ['name' => 'Lucky', 'email' => 'Lucky@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Non Aktif'],
+            ['name' => 'reva', 'email' => 'reva@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
 
             ['name' => 'test5', 'email' => 'test5@gmail.com', 'password' => '12345', 'role' => 'Mahasiswa', 'prodi'=> 'Informatika', 'mhs'=>1, 'status' => 'Aktif'],
             ['name' => 'test6', 'email' => 'test6@gmail.com', 'password' => '12345', 'role' => 'Pembimbing Akademik', 'prodi' => 'Informatika', 'pa'=>1, 'status' => 'Aktif'],

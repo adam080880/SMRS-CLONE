@@ -65,7 +65,7 @@
           <td>
             <div class="flex flex-col items-center justify-center gap-[8px]">
               <span class="text-[14px] font-[500]">Status Akademik</span>
-              <div class="px-[12px] rounded-xl py-[4px] bg-[#00FF66]">
+              <div class="px-[12px] rounded-xl py-[4px] {{$mahasiswa->status === 'Aktif' ? 'bg-[#00FF66]' : 'bg-[#FF6161]'}}">
                 <span class="text-[24px] font-[700] text-[#FFF] uppercase">{{$mahasiswa->status}}</span>
               </div>
             </div>
