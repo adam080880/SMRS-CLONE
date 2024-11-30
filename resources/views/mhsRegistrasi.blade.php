@@ -111,7 +111,11 @@
           </table>
         </div>
 
-        <button id="btn-payment-handler" onclick="handlePay()" class="mt-[16px] px-[30px] py-[10px] bg-red-300 font-bold text-gray-700 rounded-[10px] self-center">Bayar</button>
+        @if ($mahasiswa->payment == false)
+          <button id="btn-payment-handler" onclick="handlePay()" class="mt-[16px] px-[30px] py-[10px] bg-red-300 font-bold text-gray-700 rounded-[10px] self-center">Bayar</button>
+        @else
+          <button id="btn-payment-handler" class="mt-[16px] px-[30px] py-[10px] font-bold bg-[#00FF66] text-white rounded-[10px] self-center">Sudah Dibayar</button>
+        @endif
       </div>
     </div>
   </div>
@@ -134,41 +138,67 @@
   };
 
   const aktifkan = async function() {
-    const payload = {
-      _token: "{{ csrf_token() }}",
-    };
+    try {
+      const payload = {
+        _token: "{{ csrf_token() }}",
+      };
 
-    const response = await fetch("{{ route('api.mahasiswa.aktif') }}", {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {
-          'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
-        },
-      });
+      const response = await fetch("{{ route('api.mahasiswa.aktif') }}", {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
+          },
+        });
 
-      if (!response.ok) {
-        throw Error('Internal Server Error');
-      }
+        if (!response.ok) {
+          throw Error('Internal Server Error');
+        }
 
-      const createRes = await response.json();
+        const createRes = await response.json();
 
-      if (createRes.error) {
-        throw Error(createRes.message);
-      }
-      
-      alert('Berhasil aktifkan status mahasiswa');
+        if (createRes.error) {
+          throw Error(createRes.message);
+        }
+        
+        alert('Berhasil aktifkan status mahasiswa');
 
-      window.location.href = '{{route("mahasiswa.registrasi")}}';
+        window.location.href = '{{route("mahasiswa.registrasi")}}';
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
-  const handlePay = function () {
-    alert('Berhasil melakukan pembayaran');
+  const handlePay = async function () {
+    try {
+      const payload = {
+        _token: "{{ csrf_token() }}",
+      };
 
-    document.getElementById('btn-payment-handler').innerHTML = 'Sudah Dibayar';
-    document.getElementById('btn-payment-handler').classList.remove('bg-red-300');
-    document.getElementById('btn-payment-handler').classList.remove('text-gray-700');
-    document.getElementById('btn-payment-handler').classList.add('bg-[#00FF66]');
-    document.getElementById('btn-payment-handler').classList.add('text-white');
+      const response = await fetch("{{ route('api.mahasiswa.payment') }}", {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'Content-Type': 'application/json', // Konten yang dikirim dalam format JSON
+          },
+        });
+
+        if (!response.ok) {
+          throw Error('Internal Server Error');
+        }
+
+        const createRes = await response.json();
+
+        if (createRes.error) {
+          throw Error(createRes.message);
+        }
+
+      alert('Berhasil melakukan pembayaran');
+
+      window.location.href = '{{route("mahasiswa.registrasi")}}';
+    } catch (error) {
+      alert(error.message);
+    }
   }
 </script>
 

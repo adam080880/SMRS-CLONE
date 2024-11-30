@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('jalur_masuk');
             $table->year('angkatan');
             $table->integer('semester_berjalan');
+            $table->boolean('payment')->default(false);
             $table->float('ipk');
             $table->text('alamat')->nullable();
             $table->string('status')->nullable();

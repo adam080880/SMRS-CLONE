@@ -29,6 +29,7 @@ class MahasiswaSeeder extends Seeder
                 'alamat' => 'Sigar Bencah',
                 'status' => 'Aktif',
                 'pa_nip' => '1234567801',
+                'payment' => true,
             ],
             [
                 'nim' => '24060122140124',
@@ -45,6 +46,7 @@ class MahasiswaSeeder extends Seeder
                 'alamat' => 'Sigar Bencah',
                 'status' => 'Aktif',
                 'pa_nip' => '1234567801',
+                'payment' => true,
             ],
             [
                 'nim' => '240601221401235',
@@ -61,6 +63,7 @@ class MahasiswaSeeder extends Seeder
                 'alamat' => 'Alfamart Gondang',
                 'status' => 'Non Aktif',
                 'pa_nip' => '1234567801',
+                'payment' => false,
             ],
             [
                 'nim' => '24060122140126',
@@ -77,6 +80,7 @@ class MahasiswaSeeder extends Seeder
                 'alamat' => 'Jl. Anggrek No. 3, Yogyakarta',
                 'status' => 'Aktif',
                 'pa_nip' => '1234567802',
+                'payment' => true,
             ],
         ]);
     }

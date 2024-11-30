@@ -476,6 +476,10 @@ class MahasiswaController extends Controller
         try {
             $authDetail = $this->getMahasiswaAndUser();
 
+            if ($authDetail['mahasiswa']->payment == false) {
+                throw new Exception('Mahasiswa belum melakukan pembayaran, harap lakukan pembayaran terlebih dahulu');
+            }
+
             DB::table('users')
                 ->where('id', $authDetail['user']->id)
                 ->update([
@@ -486,6 +490,30 @@ class MahasiswaController extends Controller
                 ->where('id', $authDetail['mahasiswa']->id)
                 ->update([
                     'status' => 'Aktif'
+                ]);
+
+            return response()->json([
+                'data' => null,
+                'message' => 'success',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => true,
+                'data' => null,
+                'message' => $e->getMessage() ? $e->getMessage() : 'Error internal server error',
+            ]);
+        }
+    }
+
+    public function payment(Request $request)
+    {
+        try {
+            $authDetail = $this->getMahasiswaAndUser();
+
+            DB::table('mahasiswa')
+                ->where('id', $authDetail['mahasiswa']->id)
+                ->update([
+                    'payment' => true
                 ]);
 
             return response()->json([
