@@ -228,6 +228,12 @@
     renderSelectedIrsRaw(selectedIrsOptionsRaw);
   }
 
+  const cancelSelectedIrs = function(kode) {
+    selectedIrsOptions = selectedIrsOptions.filter((selectedIrsOption) => selectedIrsOption.kodemk !== kode);
+
+    renderSelectedIrsRaw(selectedIrsOptionsRaw);
+  }
+
   const handleConfirmIrs = function(kodeIrs) {
     const irs = availIrsOptions.find((irs) => irs.kode === kodeIrs);
 
@@ -280,7 +286,7 @@
             <span class="text-gray-800 text-[8px]">Kapasitas: ${irs.terisi + (choosed ? 1 : 0)}/${irs.kapasitas}</span>
 
             <div class="flex flex-row justify-end">
-              <button onclick="${choosed || isFull ? 'javascript:void(0)' : `handleConfirmIrs('${irs.kode}')`}" class="${isFull ? 'bg-[#EC1E1E]' : 'bg-[#D6D6D6]'} py-1 px-2 rounded-[10px] text-[10px]">${isFull ? 'Penuh' : choosed ? 'Dipilih' : 'Pilih'}</button>
+              <button onclick="${isFull ? "javascript:void(0)" : choosed ? `cancelSelectedIrs('${irs.kode}')` : `handleConfirmIrs('${irs.kode}')`}" class="${isFull ? 'bg-[#EC1E1E]' : 'bg-[#D6D6D6]'} py-1 px-2 rounded-[10px] text-[10px]">${isFull ? 'Penuh' : choosed ? 'Batalkan' : 'Pilih'}</button>
             </div>
           </div>
         </td>` : `<td class="border border-[black] w-[200px] h-[93px] px-4 py-2">
